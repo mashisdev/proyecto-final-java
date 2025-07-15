@@ -1,20 +1,19 @@
 package com.mashis.back.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@EqualsAndHashCode(exclude = "categories")
+@ToString(exclude = "categories")
 public class Product {
 
     @Id
@@ -24,19 +23,28 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @Column(length = 1000)
+    @Column(nullable = false)
+    private String brand;
+
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
-    private Double price;
+    private Integer stock;
 
-    @ElementCollection(fetch = FetchType.EAGER) // Fetch categories eagerly with the product
-    @CollectionTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"))
-    @Column(name = "category")
-    private Set<String> categories = new HashSet<>();
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(nullable = false)
+    private String category;
 
     private String imageUrl;
 
-    @Column(nullable = false)
-    private Integer stock;
+    public Product(String name, String description, Integer stock, BigDecimal price, String imageUrl) {
+        this.name = name;
+        this.description = description;
+        this.stock = stock;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
 }

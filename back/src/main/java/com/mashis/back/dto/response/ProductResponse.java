@@ -1,25 +1,20 @@
-package com.mashis.back.dto;
+package com.mashis.back.dto.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class ProductResponse {
     private Long id;
     private String name;
     private String brand;
-    private String description;
     private BigDecimal price;
-    private List<String> categories;
-    private String imageUrl;
     private Integer stock;
+    private String description;
+    private String categories;
 }
-
