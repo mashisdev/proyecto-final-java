@@ -5,60 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tienda Online</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
   </head>
   <body>
     <header>
-      <h1>Mi Tienda Online</h1>
-      <button id="view-orders-btn">Consultar Órdenes</button>
+      <h1>Mi Tienda Tecnológica</h1>
+      <div class="order-search-container">
+        <h3>Consultar mis órdenes</h3>
+        <form id="search-order-form">
+          <input
+            type="email"
+            id="search-email"
+            placeholder="Ingresa tu email"
+            required
+          />
+          <button type="submit">Buscar</button>
+        </form>
+        <div id="order-results-container"></div>
+      </div>
     </header>
 
-    <main>
-      <section id="product-list">
-        <h2>Nuestros Productos</h2>
-      </section>
+    <main class="store-layout">
+      <div id="product-carousels-container" class="product-grid"></div>
 
-      <aside id="cart-sidebar">
-        <h2>Carrito de Compras</h2>
+      <aside class="cart-container">
+        <h2><i class="fas fa-shopping-cart"></i> Carrito</h2>
         <div id="cart-items">
-          <p id="empty-cart-message">El carrito está vacío.</p>
+          <p>El carrito está vacío.</p>
         </div>
-        <div id="cart-summary">
-          <p>Total: $<span id="cart-total">0.00</span></p>
-          <button id="clear-cart-btn" class="hidden">Vaciar Carrito</button>
-          <button id="checkout-btn" class="hidden">Comprar</button>
+        <div id="cart-footer">
+          <p>Total: <span id="cart-total">$0.00</span></p>
+          <button id="buy-button" class="btn-buy" disabled>Comprar</button>
+          <button id="clear-cart-button" class="btn-clear" disabled>
+            Vaciar Carrito
+          </button>
         </div>
       </aside>
     </main>
 
-    <div id="checkout-modal" class="modal">
+    <div id="customer-modal" class="modal">
       <div class="modal-content">
         <span class="close-button">&times;</span>
-        <h3>Datos de Contacto</h3>
-        <form id="checkout-form">
-          <label for="firstName">Nombre:</label>
-          <input type="text" id="firstName" required />
-
-          <label for="lastName">Apellido:</label>
-          <input type="text" id="lastName" required />
-
+        <h2>Información de Contacto</h2>
+        <form id="customer-form">
+          <label for="firstname">Nombre:</label>
+          <input type="text" id="firstname" required />
+          <label for="lastname">Apellido:</label>
+          <input type="text" id="lastname" required />
           <label for="email">Email:</label>
           <input type="email" id="email" required />
-
-          <button type="submit">Confirmar Compra</button>
+          <button type="submit">Finalizar Compra</button>
         </form>
-      </div>
-    </div>
-
-    <div id="orders-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h3>Consultar Órdenes por Email</h3>
-        <form id="order-search-form">
-          <label for="search-email">Email:</label>
-          <input type="email" id="search-email" required />
-          <button type="submit">Buscar Órdenes</button>
-        </form>
-        <div id="customer-orders-results"></div>
       </div>
     </div>
 
