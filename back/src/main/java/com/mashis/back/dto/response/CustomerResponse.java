@@ -1,5 +1,7 @@
 package com.mashis.back.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.mashis.back.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -43,6 +43,12 @@ public class CustomerService {
                 .map(customerMapper::toResponse);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<CustomerResponse> findCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email)
+                .map(customerMapper::toResponse);
+    }
+
     @Transactional
     public Optional<CustomerResponse> updateCustomer(Long id, CustomerRequest customerRequest) {
         return customerRepository.findById(id)

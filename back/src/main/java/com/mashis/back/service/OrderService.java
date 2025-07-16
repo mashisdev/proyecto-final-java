@@ -78,7 +78,6 @@ public class OrderService {
         order.setTotalAmount(totalAmount);
         Order savedOrder = orderRepository.save(order);
 
-        // Recargar la orden para asegurar que todas las relaciones EAGER se carguen.
         Optional<Order> reloadedOrderOptional = orderRepository.findById(savedOrder.getId());
 
         if (reloadedOrderOptional.isPresent()) {

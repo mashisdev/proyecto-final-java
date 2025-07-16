@@ -2,6 +2,7 @@ package com.mashis.back.controller;
 
 import com.mashis.back.dto.request.CustomerRequest;
 import com.mashis.back.dto.response.CustomerResponse;
+import com.mashis.back.exception.notFound.CustomerNotFoundException;
 import com.mashis.back.service.CustomerService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -34,22 +35,31 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponse> getCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id)
-                .map(customer -> new ResponseEntity<>(customer, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with ID: " + id)); // El controlador lanza la excepción
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<CustomerResponse> getCustomerByEmail(@RequestParam String email) {
+        return customerService.findCustomerByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with email: " + email));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CustomerResponse> updateCustomer(@PathVariable Long id, @Valid @RequestBody CustomerRequest customerRequest) {
         return customerService.updateCustomer(id, customerRequest)
-                .map(updatedCustomer -> new ResponseEntity<>(updatedCustomer, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with ID: " + id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
-        if (customerService.deleteCustomer(id)) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        boolean deleted = customerService.deleteCustomer(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            throw new CustomerNotFoundException("Customer not found with ID: " + id);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

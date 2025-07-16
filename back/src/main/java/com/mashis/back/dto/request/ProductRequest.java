@@ -34,5 +34,9 @@ public class ProductRequest {
     @NotBlank(message = "Category cannot be empty")
     @Size(min = 2, max = 50, message = "Category must be between 2 and 50 characters")
     private String category;
+
+    @Pattern(regexp = "^(http|https)://.*\\.(jpeg|jpg|gif|png|webp)$", message = "Image URL must be a valid URL ending with an image extension")
+    @Size(max = 255, message = "Image URL cannot exceed 255 characters")
+    private String imageUrl;
 }
 

@@ -1,19 +1,15 @@
 package com.mashis.back.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "categories")
-@ToString(exclude = "categories")
 public class Product {
 
     @Id
@@ -38,6 +34,7 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
+    @Column
     private String imageUrl;
 
     public Product(String name, String description, Integer stock, BigDecimal price, String imageUrl) {

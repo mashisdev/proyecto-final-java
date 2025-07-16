@@ -1,5 +1,6 @@
 package com.mashis.back.exception;
 
+import com.mashis.back.exception.notFound.ResourceNotFoundException;
 import com.mashis.back.exception.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

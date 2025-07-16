@@ -1,4 +1,4 @@
-package com.mashis.back.exception;
+package com.mashis.back.exception.notFound;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
